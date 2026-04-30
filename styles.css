@@ -153,11 +153,11 @@ a {
 
 .hero-section {
   position: relative;
-  min-height: 76svh;
+  min-height: clamp(430px, 62svh, 560px);
   overflow: hidden;
   display: grid;
-  align-items: end;
-  padding: 120px max(22px, calc((100vw - var(--content)) / 2)) 56px;
+  align-items: start;
+  padding: 92px max(22px, calc((100vw - var(--content)) / 2)) 50px;
   background: #1d241e;
 }
 
@@ -783,9 +783,9 @@ svg {
   }
 
   .hero-section {
-    min-height: 68svh;
-    padding-top: 90px;
-    padding-bottom: 42px;
+    min-height: 58svh;
+    padding-top: 58px;
+    padding-bottom: 38px;
   }
 
   .hero-media::after {
