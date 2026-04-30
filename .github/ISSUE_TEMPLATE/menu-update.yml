@@ -1,92 +1,134 @@
-name: 夏季八调内容更新
-description: 提交营业状态、菜单、公告或上线日历变更
-title: "[更新] "
+name: 更新菜单
+description: 只提交菜单品类变更
+title: "[菜单] "
 body:
   - type: markdown
     attributes:
       value: |
-        用这个表单提交网站更新。Issue 创建后，GitHub Actions 会尝试自动修改数据文件并生成 PR；合并 PR 后 GitHub Pages 会发布新内容。
-  - type: dropdown
-    id: update_type
-    attributes:
-      label: 更新类型
-      options:
-        - 今日营业状态
-        - 菜单品类
-        - 今日特饮
-        - 主理人公告
-        - 上线日历
-        - 其他
-    validations:
-      required: true
-  - type: textarea
-    id: business_status
-    attributes:
-      label: 营业状态
-      description: 例如：今天营业 / 店休、营业时间、主理人是否在店。
-      placeholder: |
-        今天营业：是
-        营业时间：12:00 - 19:00
-        主理人在店：是
-    validations:
-      required: false
+        编辑下面的当前菜单数据。每个品类用 `---` 分隔；只改菜单，不需要填写公告、日历或营业状态。
   - type: textarea
     id: menu_changes
     attributes:
-      label: 菜单变更
-      description: 写清楚新增、修改或下架的品类、分类、价格、风味、产地和说明。
-      placeholder: |
-        操作：新增
-        分类：手冲
-        名称：elto 水洗
-        价格：38
-        风味：甜橙 / 柠檬 / 血橙
+      label: 菜单内容
+      description: |
+        保留要继续供应的品类；修改字段即可。要下架时把状态改成“下架”；要删除可把操作改成“删除”。
+      value: |
+        操作：修改
+        原名称：干姜气泡美式
+        分类：特饮
+        名称：干姜气泡美式
+        英文名：GINGER SPARKLING AMERICANO
+        价格：26
+        描述：干姜的温暖辛香，搭配气泡的清爽活力，夏天醒脑的一杯。
+        咖啡豆：肯尼亚 中深烘 SOE
+        产地：Kenya
+        烘焙：特饮
+        风味：干姜 / 气泡 / 清爽
         状态：正在供应
-
+        图片：./assets/coffee-citrus.png
+        
         ---
-
+        
         操作：修改
         原名称：冰美式
+        分类：咖啡
         名称：冰美式
+        英文名：ICED AMERICANO
         价格：22
+        描述：简单一点，也挺好。
+        咖啡豆：肯尼亚 中深烘 SOE
+        产地：Kenya
+        烘焙：中深烘
+        风味：黑醋栗 / 黑糖 / 蓝莓 / 巧克力
         状态：正在供应
-    validations:
-      required: false
-  - type: textarea
-    id: special
-    attributes:
-      label: 今日特饮
-      description: 写清楚名称、价格和展示说明。
-      placeholder: |
-        名称：干姜气泡美式
+        图片：./assets/coffee-ice.png
+        
+        ---
+        
+        操作：修改
+        原名称：冰拿铁
+        分类：咖啡
+        名称：冰拿铁
+        英文名：ICED LATTE
         价格：26
-        说明：干姜的温暖辛香，搭配气泡的清爽活力。
+        描述：有点甜，也有点放松。
+        咖啡豆：肯尼亚 中深烘 SOE
+        产地：Kenya
+        烘焙：中深烘
+        风味：奶糖 / 黑糖 / 巧克力
+        状态：正在供应
+        图片：./assets/coffee-guatemala.png
+        
+        ---
+        
+        操作：修改
+        原名称：elto 混合蜜处理
+        分类：手冲
+        名称：elto 混合蜜处理
+        英文名：
+        价格：38
+        描述：浅烘焙
+        咖啡豆：
+        产地：埃塞俄比亚 elto
+        烘焙：浅烘焙
+        风味：金银花 / 红毛丹 / 蜂蜜 / 草莓
+        状态：正在供应
+        图片：./assets/coffee-ethiopia.png
+        
+        ---
+        
+        操作：修改
+        原名称：elto 水洗
+        分类：手冲
+        名称：elto 水洗
+        英文名：
+        价格：38
+        描述：浅烘焙
+        咖啡豆：
+        产地：埃塞俄比亚 elto
+        烘焙：浅烘焙
+        风味：甜橙 / 柠檬 / 血橙
+        状态：正在供应
+        图片：./assets/coffee-ethiopia.png
+        
+        ---
+        
+        操作：修改
+        原名称：elto 日晒
+        分类：手冲
+        名称：elto 日晒
+        英文名：
+        价格：40
+        描述：浅烘焙
+        咖啡豆：
+        产地：埃塞俄比亚 elto
+        烘焙：浅烘焙
+        风味：紫罗兰 / 树莓 / 草莓 / 红提
+        状态：正在供应
+        图片：./assets/coffee-citrus.png
+        
+        ---
+        
+        操作：修改
+        原名称：列级瑰夏 elto 拼配
+        分类：手冲
+        名称：列级瑰夏 elto 拼配
+        英文名：
+        价格：38
+        描述：浅烘焙
+        咖啡豆：
+        产地：埃塞俄比亚 elto
+        烘焙：浅烘焙
+        风味：金银花 / 蜜柚 / 水果糖
+        状态：正在供应
+        图片：./assets/coffee-guatemala.png
     validations:
-      required: false
-  - type: textarea
-    id: calendar
-    attributes:
-      label: 上线日历
-      description: 写清楚日期、营业时间、活动安排、主理人是否在店。
-      placeholder: |
-        2026-05-01：12:00 - 19:00，主理人在店，新豆上架
-        2026-05-02：店休，设备维护
-    validations:
-      required: false
-  - type: textarea
-    id: notice
-    attributes:
-      label: 公告内容
-      placeholder: |
-        标题：
-        日期：
-        正文：
-    validations:
-      required: false
+      required: true
   - type: textarea
     id: notes
     attributes:
-      label: 其他备注
-      description: 有图片、设计或发布时间要求可以写在这里。
+      label: 备注
+      description: |
+        图片、排序或无法按格式表达的内容写这里。
     validations:
       required: false

@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   update-site-data:
-    if: startsWith(github.event.issue.title, '[更新]')
+    if: startsWith(github.event.issue.title, '[菜单]') || startsWith(github.event.issue.title, '[公告]') || startsWith(github.event.issue.title, '[营业]') || startsWith(github.event.issue.title, '[日历]') || startsWith(github.event.issue.title, '[特饮]')
     runs-on: ubuntu-latest
 
     steps:
@@ -26,10 +26,13 @@ jobs:
       - name: Apply issue content to site data
         run: node scripts/apply-issue-update.mjs
 
+      - name: Sync issue templates with current data
+        run: node scripts/sync-issue-templates.mjs
+
       - name: Detect data changes
         id: diff
         run: |
-          if git diff --quiet -- data/site.json; then
+          if git diff --quiet -- data/site.json .github/ISSUE_TEMPLATE; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
@@ -43,7 +46,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -B "$UPDATE_BRANCH"
-          git add data/site.json
+          git add data/site.json .github/ISSUE_TEMPLATE
           git commit -m "Apply website update from issue #${{ github.event.issue.number }}"
           git push --force-with-lease origin "$UPDATE_BRANCH"
 

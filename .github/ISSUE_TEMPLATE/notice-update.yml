@@ -1,0 +1,26 @@
+name: 发布或修改公告
+description: 只提交主理人公告
+title: "[公告] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        只更新公告。修改已有公告时保持标题和日期一致；新增公告时填写新的标题、日期和正文。
+  - type: textarea
+    id: notice
+    attributes:
+      label: 公告内容
+      description: |
+        下面是当前公告，可直接修改其中一条，也可以替换为新公告。
+      value: |
+        标题：今天也不用太用力
+        日期：2026-04-30
+        正文：夏季八调菜单已更新：特饮、冰咖啡和 elto 手冲都在供应。
+        
+        ---
+        
+        标题：更新方式调整
+        日期：2026-04-29
+        正文：网站不再接受预约，也不设站内后台。营业状态、菜单和日历更新请通过 GitHub Issue 提交。
+    validations:
+      required: true

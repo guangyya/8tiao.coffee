@@ -1,0 +1,19 @@
+name: 更新今日特饮
+description: 只提交今日特饮展示内容
+title: "[特饮] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        只更新首页的今日特饮卡片，不影响完整菜单列表。
+  - type: textarea
+    id: special
+    attributes:
+      label: 今日特饮
+      value: |
+        名称：干姜气泡美式
+        价格：26
+        说明：干姜的温暖辛香，搭配气泡的清爽活力，夏天醒脑的一杯。
+        状态：今日供应
+    validations:
+      required: true

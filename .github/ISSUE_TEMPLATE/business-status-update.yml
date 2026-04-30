@@ -1,0 +1,19 @@
+name: 更新营业状态
+description: 只提交今天是否营业、营业时间和主理人状态
+title: "[营业] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        只更新营业状态，不需要关心菜单、公告或日历。
+  - type: textarea
+    id: business_status
+    attributes:
+      label: 营业状态
+      value: |
+        今天营业：是
+        营业时间：12:00 - 19:00
+        主理人在店：是
+        备注：可以等一下，新鲜烘焙会认真对待每一杯。
+    validations:
+      required: true

@@ -16,7 +16,7 @@ const changes = [];
 
 applyBusinessStatus(data, sections.get("营业状态"));
 applySpecial(data, sections.get("今日特饮"));
-applyMenuChanges(data, sections.get("菜单变更"));
+applyMenuChanges(data, sections.get("菜单内容") || sections.get("菜单变更"));
 applyCalendar(data, sections.get("上线日历"));
 applyNotice(data, sections.get("公告内容"));
 
@@ -221,19 +221,23 @@ function applyCalendar(site, text) {
 
 function applyNotice(site, text) {
   if (!text) return;
-  const values = keyValues(text);
-  const title = firstValue(values, ["标题"]);
-  const body = firstValue(values, ["正文", "内容"]);
-  if (!title || !body) return;
+  const blocks = splitBlocks(text);
 
-  const date = firstValue(values, ["日期"]) || todayISO();
-  const existing = site.notices.find((notice) => notice.title === title && notice.date === date);
-  if (existing) {
-    existing.body = body;
-    changes.push(`公告已更新：${title}`);
-  } else {
-    site.notices.unshift({ title, date, body });
-    changes.push(`公告已新增：${title}`);
+  for (const block of blocks) {
+    const values = keyValues(block);
+    const title = firstValue(values, ["标题"]);
+    const body = firstValue(values, ["正文", "内容"]);
+    if (!title || !body) continue;
+
+    const date = firstValue(values, ["日期"]) || todayISO();
+    const existing = site.notices.find((notice) => notice.title === title && notice.date === date);
+    if (existing) {
+      existing.body = body;
+      changes.push(`公告已更新：${title}`);
+    } else {
+      site.notices.unshift({ title, date, body });
+      changes.push(`公告已新增：${title}`);
+    }
   }
 }
 
