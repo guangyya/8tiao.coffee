@@ -1,0 +1,83 @@
+name: 夏季八调内容更新
+description: 提交营业状态、菜单、公告或上线日历变更
+title: "[更新] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        用这个表单提交网站更新。Issue 创建后，维护者会按内容修改静态文件并发布到 GitHub Pages。
+  - type: dropdown
+    id: update_type
+    attributes:
+      label: 更新类型
+      options:
+        - 今日营业状态
+        - 菜单品类
+        - 今日特饮
+        - 主理人公告
+        - 上线日历
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: business_status
+    attributes:
+      label: 营业状态
+      description: 例如：今天营业 / 店休、营业时间、主理人是否在店。
+      placeholder: |
+        今天营业：是
+        营业时间：12:00 - 19:00
+        主理人在店：是
+    validations:
+      required: false
+  - type: textarea
+    id: menu_changes
+    attributes:
+      label: 菜单变更
+      description: 写清楚新增、修改或下架的品类、分类、价格、风味、产地和说明。
+      placeholder: |
+        分类：手冲
+        名称：elto 水洗
+        价格：38
+        风味：甜橙 / 柠檬 / 血橙
+        状态：正在供应
+    validations:
+      required: false
+  - type: textarea
+    id: special
+    attributes:
+      label: 今日特饮
+      description: 写清楚名称、价格和展示说明。
+      placeholder: |
+        名称：干姜气泡美式
+        价格：26
+        说明：干姜的温暖辛香，搭配气泡的清爽活力。
+    validations:
+      required: false
+  - type: textarea
+    id: calendar
+    attributes:
+      label: 上线日历
+      description: 写清楚日期、营业时间、活动安排、主理人是否在店。
+      placeholder: |
+        2026-05-01：12:00 - 19:00，主理人在店，新豆上架
+        2026-05-02：店休，设备维护
+    validations:
+      required: false
+  - type: textarea
+    id: notice
+    attributes:
+      label: 公告内容
+      placeholder: |
+        标题：
+        日期：
+        正文：
+    validations:
+      required: false
+  - type: textarea
+    id: notes
+    attributes:
+      label: 其他备注
+      description: 有图片、设计或发布时间要求可以写在这里。
+    validations:
+      required: false
