@@ -23,7 +23,7 @@
       "notes": "干姜 / 气泡 / 清爽",
       "price": 26,
       "available": true,
-      "image": "./assets/coffee-citrus.png"
+      "image": "./assets/coffee-ginger-sparkling-americano.png"
     },
     {
       "category": "coffee",
@@ -36,7 +36,7 @@
       "notes": "黑醋栗 / 黑糖 / 蓝莓 / 巧克力",
       "price": 22,
       "available": true,
-      "image": "./assets/coffee-ice.png"
+      "image": "./assets/coffee-iced-americano.png"
     },
     {
       "category": "coffee",
@@ -49,7 +49,7 @@
       "notes": "奶糖 / 黑糖 / 巧克力",
       "price": 26,
       "available": true,
-      "image": "./assets/coffee-guatemala.png"
+      "image": "./assets/coffee-iced-latte.png"
     },
     {
       "category": "handBrew",
@@ -62,7 +62,7 @@
       "notes": "金银花 / 红毛丹 / 蜂蜜 / 草莓",
       "price": 38,
       "available": true,
-      "image": "./assets/coffee-ethiopia.png"
+      "image": "./assets/coffee-elto-honey.png"
     },
     {
       "category": "handBrew",
@@ -75,7 +75,7 @@
       "notes": "甜橙 / 柠檬 / 血橙",
       "price": 38,
       "available": true,
-      "image": "./assets/coffee-ethiopia.png"
+      "image": "./assets/coffee-elto-washed.png"
     },
     {
       "category": "handBrew",
@@ -88,7 +88,7 @@
       "notes": "紫罗兰 / 树莓 / 草莓 / 红提",
       "price": 40,
       "available": true,
-      "image": "./assets/coffee-citrus.png"
+      "image": "./assets/coffee-elto-natural.png"
     },
     {
       "category": "handBrew",
@@ -101,7 +101,7 @@
       "notes": "金银花 / 蜜柚 / 水果糖",
       "price": 38,
       "available": true,
-      "image": "./assets/coffee-guatemala.png"
+      "image": "./assets/coffee-geisha-elto-blend.png"
     }
   ],
   "notices": [

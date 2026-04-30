@@ -25,7 +25,7 @@ body:
         烘焙：特饮
         风味：干姜 / 气泡 / 清爽
         状态：正在供应
-        图片：./assets/coffee-citrus.png
+        图片：./assets/coffee-ginger-sparkling-americano.png
         
         ---
         
@@ -41,7 +41,7 @@ body:
         烘焙：中深烘
         风味：黑醋栗 / 黑糖 / 蓝莓 / 巧克力
         状态：正在供应
-        图片：./assets/coffee-ice.png
+        图片：./assets/coffee-iced-americano.png
         
         ---
         
@@ -57,7 +57,7 @@ body:
         烘焙：中深烘
         风味：奶糖 / 黑糖 / 巧克力
         状态：正在供应
-        图片：./assets/coffee-guatemala.png
+        图片：./assets/coffee-iced-latte.png
         
         ---
         
@@ -73,7 +73,7 @@ body:
         烘焙：浅烘焙
         风味：金银花 / 红毛丹 / 蜂蜜 / 草莓
         状态：正在供应
-        图片：./assets/coffee-ethiopia.png
+        图片：./assets/coffee-elto-honey.png
         
         ---
         
@@ -89,7 +89,7 @@ body:
         烘焙：浅烘焙
         风味：甜橙 / 柠檬 / 血橙
         状态：正在供应
-        图片：./assets/coffee-ethiopia.png
+        图片：./assets/coffee-elto-washed.png
         
         ---
         
@@ -105,7 +105,7 @@ body:
         烘焙：浅烘焙
         风味：紫罗兰 / 树莓 / 草莓 / 红提
         状态：正在供应
-        图片：./assets/coffee-citrus.png
+        图片：./assets/coffee-elto-natural.png
         
         ---
         
@@ -121,7 +121,7 @@ body:
         烘焙：浅烘焙
         风味：金银花 / 蜜柚 / 水果糖
         状态：正在供应
-        图片：./assets/coffee-guatemala.png
+        图片：./assets/coffee-geisha-elto-blend.png
     validations:
       required: true
   - type: textarea

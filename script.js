@@ -9,6 +9,13 @@ const imageOptions = [
   "./assets/coffee-guatemala.png",
   "./assets/coffee-ice.png",
   "./assets/coffee-citrus.png",
+  "./assets/coffee-ginger-sparkling-americano.png",
+  "./assets/coffee-iced-americano.png",
+  "./assets/coffee-iced-latte.png",
+  "./assets/coffee-elto-honey.png",
+  "./assets/coffee-elto-washed.png",
+  "./assets/coffee-elto-natural.png",
+  "./assets/coffee-geisha-elto-blend.png",
 ];
 
 const els = {
