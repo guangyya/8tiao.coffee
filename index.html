@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="夏季八调 8tiao.coffee 手冲咖啡店官网，查看营业状态、手冲菜单、主理人公告、上线日历与特调预约。"
+      content="夏季八调 8tiao.coffee 咖啡店官网，查看营业状态、菜单、主理人公告、上线日历与特调预约。"
     />
     <title>夏季八调 | 8tiao.coffee</title>
     <link rel="preconnect" href="https://unpkg.com" />
@@ -17,11 +17,11 @@
         <span class="brand-mark">8</span>
         <span>
           <strong>夏季八调</strong>
-          <small>8tiao.coffee</small>
+          <small>SUMMER OCTAVE</small>
         </span>
       </a>
       <nav class="nav-links" aria-label="主要导航">
-        <a href="#coffee">手冲</a>
+        <a href="#coffee">菜单</a>
         <a href="#calendar">日历</a>
         <a href="#notice">公告</a>
         <button class="icon-text-button" id="adminEntry" type="button">
@@ -37,17 +37,17 @@
           <img src="./assets/coffee-collage.png" alt="" />
         </div>
         <div class="hero-content">
-          <p class="eyebrow">夏天只做八个调性清楚的杯子</p>
+          <p class="eyebrow">今天也不用太用力</p>
           <h1>夏季八调</h1>
           <p class="hero-copy">
-            手冲、冰冲和少量特调，每天由主理人按豆单状态更新。
+            八种心情，一杯咖啡。新鲜烘焙，认真对待每一杯。
           </p>
           <div class="hero-actions">
             <a class="primary-link" href="#reserve">
               <i data-lucide="cup-soda"></i>
-              预约今日特调
+              预约今日特饮
             </a>
-            <a class="secondary-link" href="#coffee">看今日豆单</a>
+            <a class="secondary-link" href="#coffee">看完整菜单</a>
           </div>
         </div>
       </section>
@@ -78,11 +78,21 @@
 
       <section class="content-section" id="coffee">
         <div class="section-heading">
-          <span class="section-kicker">Hand Brew</span>
-          <h2>今日手冲</h2>
-          <p>主理人可以随时在管理面板调整品类、价格、售罄状态和图片。</p>
+          <span class="section-kicker">Menu</span>
+          <h2>今日菜单</h2>
+          <p>特饮、咖啡和手冲会按当天豆子状态更新；可以等一下，先喝一口再说。</p>
         </div>
         <div class="coffee-grid" id="coffeeGrid"></div>
+        <div class="menu-story">
+          <div>
+            <span class="section-kicker">Mood</span>
+            <p>先喝一口再说。慢一点，感受生活的八种调子。</p>
+          </div>
+          <div>
+            <span class="section-kicker">Beans</span>
+            <p>我们精选埃塞俄比亚及肯尼亚优质咖啡豆，新鲜烘焙，每一杯都值得慢慢品味。</p>
+          </div>
+        </div>
       </section>
 
       <section class="content-section calendar-section" id="calendar">
@@ -197,7 +207,7 @@
 
           <section class="admin-block">
             <div class="admin-block-title">
-              <h3>咖啡品类</h3>
+              <h3>菜单品类</h3>
               <button class="ghost-button" id="addCoffee" type="button">
                 <i data-lucide="plus"></i>
                 新增
@@ -246,14 +256,26 @@
       <article class="editor-card coffee-editor-card">
         <div class="editor-card-title">
           <strong></strong>
-          <button class="icon-button delete-row" type="button" aria-label="删除咖啡">
+          <button class="icon-button delete-row" type="button" aria-label="删除品类">
             <i data-lucide="trash-2"></i>
           </button>
         </div>
         <div class="editor-grid">
           <label>
+            <span>分类</span>
+            <select data-field="category">
+              <option value="specials">特饮 SPECIALS</option>
+              <option value="coffee">咖啡 COFFEE</option>
+              <option value="handBrew">手冲 HAND BREW</option>
+            </select>
+          </label>
+          <label>
             <span>名称</span>
             <input data-field="name" type="text" />
+          </label>
+          <label>
+            <span>英文名</span>
+            <input data-field="englishName" type="text" />
           </label>
           <label>
             <span>价格</span>
@@ -264,12 +286,20 @@
             <input data-field="origin" type="text" />
           </label>
           <label>
-            <span>处理法</span>
+            <span>烘焙 / 处理</span>
             <input data-field="process" type="text" />
+          </label>
+          <label>
+            <span>咖啡豆</span>
+            <input data-field="bean" type="text" />
           </label>
           <label>
             <span>风味</span>
             <input data-field="notes" type="text" />
+          </label>
+          <label class="full-width">
+            <span>描述</span>
+            <textarea data-field="description" rows="3"></textarea>
           </label>
           <label>
             <span>图片</span>

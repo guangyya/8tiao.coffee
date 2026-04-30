@@ -2,6 +2,13 @@ const STORAGE_KEY = "eight-tiao-coffee-state";
 const SESSION_KEY = "eight-tiao-owner-session";
 const ADMIN_USER = "owner";
 const ADMIN_PASS = "8tiao2026";
+const DATA_VERSION = 2;
+
+const menuGroups = [
+  { id: "specials", title: "特饮", label: "SPECIALS" },
+  { id: "coffee", title: "咖啡", label: "COFFEE" },
+  { id: "handBrew", title: "手冲", label: "HAND BREW" },
+];
 
 const imageOptions = [
   "./assets/coffee-ethiopia.png",
@@ -61,73 +68,132 @@ let state = loadState();
 
 function defaultState() {
   return {
+    version: DATA_VERSION,
     shop: {
       open: true,
       hours: "12:00 - 19:00",
       ownerPresent: true,
-      ownerNote: "今天主理人在吧台，适合聊豆子和冲煮参数。",
+      ownerNote: "可以等一下，新鲜烘焙会认真对待每一杯。",
       special: {
-        name: "青柠盐气泡冷萃",
-        description: "冷萃、青柠皮、海盐气泡水，杯感清亮，做完即止。",
-        price: 36,
-        remaining: 8,
-        total: 16,
+        name: "干姜气泡美式",
+        description: "干姜的温暖辛香，搭配气泡的清爽活力，夏天醒脑的一杯。",
+        price: 26,
+        remaining: 12,
+        total: 20,
       },
     },
     coffees: [
       {
         id: createId(),
-        name: "埃塞俄比亚 西达摩 夏花",
-        origin: "Ethiopia Sidama",
-        process: "水洗",
-        notes: "白桃 / 茉莉 / 柠檬糖",
-        price: 42,
+        category: "specials",
+        name: "干姜气泡美式",
+        englishName: "GINGER SPARKLING AMERICANO",
+        description: "干姜的温暖辛香，搭配气泡的清爽活力，夏天醒脑的一杯。",
+        bean: "肯尼亚 中深烘 SOE",
+        origin: "Kenya",
+        process: "特饮",
+        notes: "干姜 / 气泡 / 清爽",
+        price: 26,
         available: true,
-        image: "./assets/coffee-ethiopia.png",
+        image: "./assets/coffee-citrus.png",
       },
       {
         id: createId(),
-        name: "危地马拉 阿卡特南果",
-        origin: "Guatemala Acatenango",
-        process: "蜜处理",
-        notes: "可可 / 红苹果 / 榛果",
-        price: 40,
-        available: true,
-        image: "./assets/coffee-guatemala.png",
-      },
-      {
-        id: createId(),
-        name: "冰手冲 季风拼配",
-        origin: "Yunnan + Kenya",
-        process: "拼配",
-        notes: "乌梅 / 冰茶 / 黑加仑",
-        price: 38,
+        category: "coffee",
+        name: "冰美式",
+        englishName: "ICED AMERICANO",
+        description: "简单一点，也挺好。",
+        bean: "肯尼亚 中深烘 SOE",
+        origin: "Kenya",
+        process: "中深烘",
+        notes: "黑醋栗 / 黑糖 / 蓝莓 / 巧克力",
+        price: 22,
         available: true,
         image: "./assets/coffee-ice.png",
       },
       {
         id: createId(),
-        name: "夏季八调 特调杯",
-        origin: "Limited",
-        process: "冷萃特调",
-        notes: "柑橘 / 气泡 / 微咸",
-        price: 36,
+        category: "coffee",
+        name: "冰拿铁",
+        englishName: "ICED LATTE",
+        description: "有点甜，也有点放松。",
+        bean: "肯尼亚 中深烘 SOE",
+        origin: "Kenya",
+        process: "中深烘",
+        notes: "奶糖 / 黑糖 / 巧克力",
+        price: 26,
+        available: true,
+        image: "./assets/coffee-guatemala.png",
+      },
+      {
+        id: createId(),
+        category: "handBrew",
+        name: "elto 混合蜜处理",
+        englishName: "",
+        description: "浅烘焙",
+        bean: "",
+        origin: "埃塞俄比亚 elto",
+        process: "浅烘焙",
+        notes: "金银花 / 红毛丹 / 蜂蜜 / 草莓",
+        price: 38,
+        available: true,
+        image: "./assets/coffee-ethiopia.png",
+      },
+      {
+        id: createId(),
+        category: "handBrew",
+        name: "elto 水洗",
+        englishName: "",
+        description: "浅烘焙",
+        bean: "",
+        origin: "埃塞俄比亚 elto",
+        process: "浅烘焙",
+        notes: "甜橙 / 柠檬 / 血橙",
+        price: 38,
+        available: true,
+        image: "./assets/coffee-ethiopia.png",
+      },
+      {
+        id: createId(),
+        category: "handBrew",
+        name: "elto 日晒",
+        englishName: "",
+        description: "浅烘焙",
+        bean: "",
+        origin: "埃塞俄比亚 elto",
+        process: "浅烘焙",
+        notes: "紫罗兰 / 树莓 / 草莓 / 红提",
+        price: 40,
         available: true,
         image: "./assets/coffee-citrus.png",
+      },
+      {
+        id: createId(),
+        category: "handBrew",
+        name: "列级瑰夏 elto 拼配",
+        englishName: "",
+        description: "浅烘焙",
+        bean: "",
+        origin: "埃塞俄比亚 elto",
+        process: "浅烘焙",
+        notes: "金银花 / 蜜柚 / 水果糖",
+        price: 38,
+        available: true,
+        image: "./assets/coffee-guatemala.png",
       },
     ],
     notices: [
       {
         id: createId(),
-        title: "本周只开四天",
+        title: "今天也不用太用力",
         date: todayISO(),
-        body: "豆单会在每天开门前更新。天气太热时，冰手冲优先出杯。",
+        body: "夏季八调菜单已更新：特饮、冰咖啡和 elto 手冲都在供应。",
       },
       {
         id: createId(),
-        title: "试营业预约规则",
+        title: "特饮预约规则",
         date: addDaysISO(new Date(), -1),
-        body: "特调不需要登录，留下 ID 和杯数即可。到店报 ID 取杯。",
+        body: "干姜气泡美式不需要登录，留下 ID 和杯数即可。到店报 ID 取杯。",
       },
     ],
     calendar: buildDefaultCalendar(),
@@ -174,6 +240,10 @@ function loadState() {
 
 function normalizeState(saved) {
   const fresh = defaultState();
+  if (saved.version !== DATA_VERSION) {
+    return fresh;
+  }
+
   return {
     ...fresh,
     ...saved,
@@ -246,33 +316,60 @@ function renderSpecial() {
 function renderCoffeeGrid() {
   const coffees = state.coffees.filter((coffee) => coffee.available);
   if (!coffees.length) {
-    els.coffeeGrid.innerHTML = `<p class="empty-state">今天还没有发布咖啡品类。</p>`;
+    els.coffeeGrid.innerHTML = `<p class="empty-state">今天还没有发布菜单品类。</p>`;
     return;
   }
 
-  els.coffeeGrid.innerHTML = coffees
-    .map(
-      (coffee) => `
-        <article class="coffee-card">
-          <div class="coffee-image">
-            <img src="${safeImage(coffee.image)}" alt="${escapeHTML(coffee.name)}" loading="lazy" />
-            <span class="availability-badge">正在供应</span>
+  els.coffeeGrid.innerHTML = menuGroups
+    .map((group) => {
+      const groupItems = coffees.filter((coffee) => (coffee.category || "handBrew") === group.id);
+      if (!groupItems.length) return "";
+
+      return `
+        <section class="menu-category menu-category-${group.id}">
+          <div class="menu-category-heading">
+            <h3>${group.title}</h3>
+            <span>${group.label}</span>
           </div>
-          <div class="coffee-body">
-            <div class="coffee-title-row">
-              <h3>${escapeHTML(coffee.name)}</h3>
-              <span class="price">¥${Number(coffee.price) || 0}</span>
-            </div>
-            <p>${escapeHTML(coffee.notes)}</p>
-            <div class="tag-row">
-              <span class="tag">${escapeHTML(coffee.origin)}</span>
-              <span class="tag">${escapeHTML(coffee.process)}</span>
-            </div>
+          <div class="menu-items">
+            ${groupItems.map(renderMenuItem).join("")}
           </div>
-        </article>
-      `,
-    )
+        </section>
+      `;
+    })
     .join("");
+}
+
+function renderMenuItem(coffee) {
+  const notes = splitTags(coffee.notes);
+  return `
+    <article class="coffee-card">
+      <div class="coffee-image">
+        <img src="${safeImage(coffee.image)}" alt="${escapeHTML(coffee.name)}" loading="lazy" />
+        <span class="availability-badge">正在供应</span>
+      </div>
+      <div class="coffee-body">
+        <div class="coffee-title-row">
+          <div>
+            <h3>${escapeHTML(coffee.name)}</h3>
+            ${coffee.englishName ? `<small>${escapeHTML(coffee.englishName)}</small>` : ""}
+          </div>
+          <span class="price">¥${Number(coffee.price) || 0}</span>
+        </div>
+        ${coffee.description ? `<p>${escapeHTML(coffee.description)}</p>` : ""}
+        ${
+          notes.length
+            ? `<p class="flavor-line"><strong>风味：</strong>${notes.map(escapeHTML).join(" | ")}</p>`
+            : ""
+        }
+        <div class="tag-row">
+          ${coffee.bean ? `<span class="tag"><i data-lucide="bean"></i>${escapeHTML(coffee.bean)}</span>` : ""}
+          ${coffee.origin ? `<span class="tag"><i data-lucide="map-pin"></i>${escapeHTML(coffee.origin)}</span>` : ""}
+          ${coffee.process ? `<span class="tag">${escapeHTML(coffee.process)}</span>` : ""}
+        </div>
+      </div>
+    </article>
+  `;
 }
 
 function renderCalendar() {
@@ -351,31 +448,39 @@ function renderCoffeeEditor() {
   els.coffeeEditor.innerHTML = "";
   state.coffees.forEach((coffee) => {
     const node = els.coffeeEditorTemplate.content.firstElementChild.cloneNode(true);
-    node.querySelector(".editor-card-title strong").textContent = coffee.name || "未命名咖啡";
+    node.querySelector(".editor-card-title strong").textContent = coffee.name || "未命名品类";
+    setEditorValue(node, "category", coffee.category || "handBrew");
     setEditorValue(node, "name", coffee.name);
+    setEditorValue(node, "englishName", coffee.englishName);
     setEditorValue(node, "price", coffee.price);
     setEditorValue(node, "origin", coffee.origin);
     setEditorValue(node, "process", coffee.process);
+    setEditorValue(node, "bean", coffee.bean);
     setEditorValue(node, "notes", coffee.notes);
+    setEditorValue(node, "description", coffee.description);
     setEditorValue(node, "image", safeImage(coffee.image));
     setEditorValue(node, "available", coffee.available);
 
     node.querySelector(".save-row").addEventListener("click", () => {
       Object.assign(coffee, {
+        category: getEditorValue(node, "category") || "handBrew",
         name: getEditorValue(node, "name"),
+        englishName: getEditorValue(node, "englishName"),
         price: Number(getEditorValue(node, "price")) || 0,
         origin: getEditorValue(node, "origin"),
         process: getEditorValue(node, "process"),
+        bean: getEditorValue(node, "bean"),
         notes: getEditorValue(node, "notes"),
+        description: getEditorValue(node, "description"),
         image: safeImage(getEditorValue(node, "image")),
         available: Boolean(getEditorValue(node, "available")),
       });
-      persistAndRefresh("咖啡品类已保存");
+      persistAndRefresh("菜单品类已保存");
     });
 
     node.querySelector(".delete-row").addEventListener("click", () => {
       state.coffees = state.coffees.filter((item) => item.id !== coffee.id);
-      persistAndRefresh("咖啡品类已删除");
+      persistAndRefresh("菜单品类已删除");
     });
 
     els.coffeeEditor.append(node);
@@ -594,15 +699,19 @@ function bindEvents() {
   els.addCoffee.addEventListener("click", () => {
     state.coffees.push({
       id: createId(),
-      name: "新手冲",
-      origin: "Origin",
-      process: "处理法",
+      category: "handBrew",
+      name: "新菜单品类",
+      englishName: "",
+      description: "浅烘焙",
+      bean: "",
+      origin: "埃塞俄比亚 elto",
+      process: "浅烘焙",
       notes: "风味描述",
       price: 38,
       available: true,
       image: imageOptions[0],
     });
-    persistAndRefresh("已新增咖啡品类");
+    persistAndRefresh("已新增菜单品类");
   });
 
   els.addNotice.addEventListener("click", () => {
@@ -676,6 +785,13 @@ function showToast(message) {
 
 function safeImage(src) {
   return imageOptions.includes(src) ? src : imageOptions[0];
+}
+
+function splitTags(value) {
+  return String(value || "")
+    .split(/[|/／、，,]+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
 }
 
 function escapeHTML(value) {
