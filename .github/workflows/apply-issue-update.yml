@@ -1,0 +1,60 @@
+name: Apply issue update
+
+on:
+  issues:
+    types:
+      - opened
+      - edited
+      - reopened
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  update-site-data:
+    if: startsWith(github.event.issue.title, '[更新]')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply issue content to site data
+        run: node scripts/apply-issue-update.mjs
+
+      - name: Detect data changes
+        id: diff
+        run: |
+          if git diff --quiet -- data/site.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit and push update branch
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          UPDATE_BRANCH: issue-update-${{ github.event.issue.number }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$UPDATE_BRANCH"
+          git add data/site.json
+          git commit -m "Apply website update from issue #${{ github.event.issue.number }}"
+          git push --force-with-lease origin "$UPDATE_BRANCH"
+
+      - name: Create or update pull request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_API_URL: ${{ github.api_url }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SERVER_URL: ${{ github.server_url }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          UPDATE_BRANCH: issue-update-${{ github.event.issue.number }}
+          BASE_BRANCH: main
+          HAS_CHANGES: ${{ steps.diff.outputs.changed }}
+        run: node scripts/create-update-pr.mjs

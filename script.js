@@ -11,127 +11,6 @@ const imageOptions = [
   "./assets/coffee-citrus.png",
 ];
 
-const state = {
-  shop: {
-    open: true,
-    hours: "12:00 - 19:00",
-    ownerPresent: true,
-    ownerNote: "可以等一下，新鲜烘焙会认真对待每一杯。",
-    special: {
-      name: "干姜气泡美式",
-      description: "干姜的温暖辛香，搭配气泡的清爽活力，夏天醒脑的一杯。",
-      price: 26,
-      availability: "今日供应",
-    },
-  },
-  coffees: [
-    {
-      category: "specials",
-      name: "干姜气泡美式",
-      englishName: "GINGER SPARKLING AMERICANO",
-      description: "干姜的温暖辛香，搭配气泡的清爽活力，夏天醒脑的一杯。",
-      bean: "肯尼亚 中深烘 SOE",
-      origin: "Kenya",
-      process: "特饮",
-      notes: "干姜 / 气泡 / 清爽",
-      price: 26,
-      available: true,
-      image: "./assets/coffee-citrus.png",
-    },
-    {
-      category: "coffee",
-      name: "冰美式",
-      englishName: "ICED AMERICANO",
-      description: "简单一点，也挺好。",
-      bean: "肯尼亚 中深烘 SOE",
-      origin: "Kenya",
-      process: "中深烘",
-      notes: "黑醋栗 / 黑糖 / 蓝莓 / 巧克力",
-      price: 22,
-      available: true,
-      image: "./assets/coffee-ice.png",
-    },
-    {
-      category: "coffee",
-      name: "冰拿铁",
-      englishName: "ICED LATTE",
-      description: "有点甜，也有点放松。",
-      bean: "肯尼亚 中深烘 SOE",
-      origin: "Kenya",
-      process: "中深烘",
-      notes: "奶糖 / 黑糖 / 巧克力",
-      price: 26,
-      available: true,
-      image: "./assets/coffee-guatemala.png",
-    },
-    {
-      category: "handBrew",
-      name: "elto 混合蜜处理",
-      englishName: "",
-      description: "浅烘焙",
-      bean: "",
-      origin: "埃塞俄比亚 elto",
-      process: "浅烘焙",
-      notes: "金银花 / 红毛丹 / 蜂蜜 / 草莓",
-      price: 38,
-      available: true,
-      image: "./assets/coffee-ethiopia.png",
-    },
-    {
-      category: "handBrew",
-      name: "elto 水洗",
-      englishName: "",
-      description: "浅烘焙",
-      bean: "",
-      origin: "埃塞俄比亚 elto",
-      process: "浅烘焙",
-      notes: "甜橙 / 柠檬 / 血橙",
-      price: 38,
-      available: true,
-      image: "./assets/coffee-ethiopia.png",
-    },
-    {
-      category: "handBrew",
-      name: "elto 日晒",
-      englishName: "",
-      description: "浅烘焙",
-      bean: "",
-      origin: "埃塞俄比亚 elto",
-      process: "浅烘焙",
-      notes: "紫罗兰 / 树莓 / 草莓 / 红提",
-      price: 40,
-      available: true,
-      image: "./assets/coffee-citrus.png",
-    },
-    {
-      category: "handBrew",
-      name: "列级瑰夏 elto 拼配",
-      englishName: "",
-      description: "浅烘焙",
-      bean: "",
-      origin: "埃塞俄比亚 elto",
-      process: "浅烘焙",
-      notes: "金银花 / 蜜柚 / 水果糖",
-      price: 38,
-      available: true,
-      image: "./assets/coffee-guatemala.png",
-    },
-  ],
-  notices: [
-    {
-      title: "今天也不用太用力",
-      date: todayISO(),
-      body: "夏季八调菜单已更新：特饮、冰咖啡和 elto 手冲都在供应。",
-    },
-    {
-      title: "更新方式调整",
-      date: addDaysISO(new Date(), -1),
-      body: "网站不再接受预约，也不设站内后台。营业状态、菜单和日历更新请通过 GitHub Issue 提交。",
-    },
-  ],
-  calendar: buildDefaultCalendar(),
-};
-
 const els = {
   todayStatus: document.querySelector("#todayStatus"),
   todaySpecial: document.querySelector("#todaySpecial"),
@@ -140,40 +19,41 @@ const els = {
   noticeList: document.querySelector("#noticeList"),
 };
 
-function buildDefaultCalendar() {
-  const events = [
-    "埃塞水洗杯测",
-    "只做手冲",
-    "冰冲日",
-    "主理人吧台",
-    "新豆上架",
-    "黄昏特饮",
-    "休整和烘豆",
-  ];
-
-  return Array.from({ length: 14 }, (_, index) => {
-    const date = addDays(new Date(), index);
-    const weekday = date.getDay();
-    return {
-      date: toISODate(date),
-      open: weekday !== 2,
-      owner: [0, 3, 5, 6].includes(weekday) || index === 0,
-      hours: weekday === 2 ? "店休" : "12:00 - 19:00",
-      event: weekday === 2 ? "设备维护" : events[index % events.length],
-    };
-  });
+async function loadSiteData() {
+  try {
+    const response = await fetch("./data/site.json", { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    renderDataError(error);
+    return null;
+  }
 }
 
-function renderAll() {
-  renderStatus();
-  renderSpecial();
-  renderCoffeeGrid();
-  renderCalendar();
-  renderNotices();
+function renderAll(state) {
+  if (!state) return;
+  renderStatus(state);
+  renderSpecial(state);
+  renderCoffeeGrid(state);
+  renderCalendar(state);
+  renderNotices(state);
   renderIcons();
 }
 
-function renderStatus() {
+function renderDataError(error) {
+  const message = escapeHTML(error?.message || "unknown error");
+  els.todayStatus.innerHTML = `
+    <div>
+      <span class="section-kicker">Data</span>
+      <h2>菜单数据暂时无法读取</h2>
+    </div>
+    <p class="meta-line">请刷新页面或稍后再试。${message}</p>
+  `;
+}
+
+function renderStatus(state) {
   const openText = state.shop.open ? "今天营业" : "今天店休";
   const ownerText = state.shop.ownerPresent ? "主理人在店" : "主理人今天不在店";
   const dotClass = state.shop.open ? "status-dot is-open" : "status-dot";
@@ -193,7 +73,7 @@ function renderStatus() {
   `;
 }
 
-function renderSpecial() {
+function renderSpecial(state) {
   const special = state.shop.special;
 
   els.todaySpecial.innerHTML = `
@@ -209,7 +89,7 @@ function renderSpecial() {
   `;
 }
 
-function renderCoffeeGrid() {
+function renderCoffeeGrid(state) {
   const coffees = state.coffees.filter((coffee) => coffee.available);
   if (!coffees.length) {
     els.coffeeGrid.innerHTML = `<p class="empty-state">今天还没有发布菜单品类。</p>`;
@@ -268,7 +148,7 @@ function renderMenuItem(coffee) {
   `;
 }
 
-function renderCalendar() {
+function renderCalendar(state) {
   const today = todayISO();
   els.calendarGrid.innerHTML = state.calendar
     .slice()
@@ -298,7 +178,7 @@ function renderCalendar() {
     .join("");
 }
 
-function renderNotices() {
+function renderNotices(state) {
   if (!state.notices.length) {
     els.noticeList.innerHTML = `<p class="empty-state">暂无公告。</p>`;
     return;
@@ -356,17 +236,6 @@ function toISODate(date) {
   return `${year}-${month}-${day}`;
 }
 
-function addDays(date, days) {
-  const next = new Date(date);
-  next.setHours(12, 0, 0, 0);
-  next.setDate(next.getDate() + days);
-  return next;
-}
-
-function addDaysISO(date, days) {
-  return toISODate(addDays(date, days));
-}
-
 function parseISODate(value) {
   const [year, month, day] = value.split("-").map(Number);
   return new Date(year, month - 1, day, 12);
@@ -381,4 +250,4 @@ function formatNoticeDate(value) {
   return `${date.getMonth() + 1}月${date.getDate()}日`;
 }
 
-renderAll();
+loadSiteData().then(renderAll);

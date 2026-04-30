@@ -1,0 +1,170 @@
+{
+  "shop": {
+    "open": true,
+    "hours": "12:00 - 19:00",
+    "ownerPresent": true,
+    "ownerNote": "可以等一下，新鲜烘焙会认真对待每一杯。",
+    "special": {
+      "name": "干姜气泡美式",
+      "description": "干姜的温暖辛香，搭配气泡的清爽活力，夏天醒脑的一杯。",
+      "price": 26,
+      "availability": "今日供应"
+    }
+  },
+  "coffees": [
+    {
+      "category": "specials",
+      "name": "干姜气泡美式",
+      "englishName": "GINGER SPARKLING AMERICANO",
+      "description": "干姜的温暖辛香，搭配气泡的清爽活力，夏天醒脑的一杯。",
+      "bean": "肯尼亚 中深烘 SOE",
+      "origin": "Kenya",
+      "process": "特饮",
+      "notes": "干姜 / 气泡 / 清爽",
+      "price": 26,
+      "available": true,
+      "image": "./assets/coffee-citrus.png"
+    },
+    {
+      "category": "coffee",
+      "name": "冰美式",
+      "englishName": "ICED AMERICANO",
+      "description": "简单一点，也挺好。",
+      "bean": "肯尼亚 中深烘 SOE",
+      "origin": "Kenya",
+      "process": "中深烘",
+      "notes": "黑醋栗 / 黑糖 / 蓝莓 / 巧克力",
+      "price": 22,
+      "available": true,
+      "image": "./assets/coffee-ice.png"
+    },
+    {
+      "category": "coffee",
+      "name": "冰拿铁",
+      "englishName": "ICED LATTE",
+      "description": "有点甜，也有点放松。",
+      "bean": "肯尼亚 中深烘 SOE",
+      "origin": "Kenya",
+      "process": "中深烘",
+      "notes": "奶糖 / 黑糖 / 巧克力",
+      "price": 26,
+      "available": true,
+      "image": "./assets/coffee-guatemala.png"
+    },
+    {
+      "category": "handBrew",
+      "name": "elto 混合蜜处理",
+      "englishName": "",
+      "description": "浅烘焙",
+      "bean": "",
+      "origin": "埃塞俄比亚 elto",
+      "process": "浅烘焙",
+      "notes": "金银花 / 红毛丹 / 蜂蜜 / 草莓",
+      "price": 38,
+      "available": true,
+      "image": "./assets/coffee-ethiopia.png"
+    },
+    {
+      "category": "handBrew",
+      "name": "elto 水洗",
+      "englishName": "",
+      "description": "浅烘焙",
+      "bean": "",
+      "origin": "埃塞俄比亚 elto",
+      "process": "浅烘焙",
+      "notes": "甜橙 / 柠檬 / 血橙",
+      "price": 38,
+      "available": true,
+      "image": "./assets/coffee-ethiopia.png"
+    },
+    {
+      "category": "handBrew",
+      "name": "elto 日晒",
+      "englishName": "",
+      "description": "浅烘焙",
+      "bean": "",
+      "origin": "埃塞俄比亚 elto",
+      "process": "浅烘焙",
+      "notes": "紫罗兰 / 树莓 / 草莓 / 红提",
+      "price": 40,
+      "available": true,
+      "image": "./assets/coffee-citrus.png"
+    },
+    {
+      "category": "handBrew",
+      "name": "列级瑰夏 elto 拼配",
+      "englishName": "",
+      "description": "浅烘焙",
+      "bean": "",
+      "origin": "埃塞俄比亚 elto",
+      "process": "浅烘焙",
+      "notes": "金银花 / 蜜柚 / 水果糖",
+      "price": 38,
+      "available": true,
+      "image": "./assets/coffee-guatemala.png"
+    }
+  ],
+  "notices": [
+    {
+      "title": "今天也不用太用力",
+      "date": "2026-04-30",
+      "body": "夏季八调菜单已更新：特饮、冰咖啡和 elto 手冲都在供应。"
+    },
+    {
+      "title": "更新方式调整",
+      "date": "2026-04-29",
+      "body": "网站不再接受预约，也不设站内后台。营业状态、菜单和日历更新请通过 GitHub Issue 提交。"
+    }
+  ],
+  "calendar": [
+    {
+      "date": "2026-04-30",
+      "open": true,
+      "owner": true,
+      "hours": "12:00 - 19:00",
+      "event": "埃塞水洗杯测"
+    },
+    {
+      "date": "2026-05-01",
+      "open": true,
+      "owner": true,
+      "hours": "12:00 - 19:00",
+      "event": "只做手冲"
+    },
+    {
+      "date": "2026-05-02",
+      "open": true,
+      "owner": false,
+      "hours": "12:00 - 19:00",
+      "event": "冰冲日"
+    },
+    {
+      "date": "2026-05-03",
+      "open": true,
+      "owner": true,
+      "hours": "12:00 - 19:00",
+      "event": "主理人吧台"
+    },
+    {
+      "date": "2026-05-04",
+      "open": true,
+      "owner": false,
+      "hours": "12:00 - 19:00",
+      "event": "新豆上架"
+    },
+    {
+      "date": "2026-05-05",
+      "open": false,
+      "owner": false,
+      "hours": "店休",
+      "event": "设备维护"
+    },
+    {
+      "date": "2026-05-06",
+      "open": true,
+      "owner": true,
+      "hours": "12:00 - 19:00",
+      "event": "黄昏特饮"
+    }
+  ]
+}

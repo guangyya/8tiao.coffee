@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        用这个表单提交网站更新。Issue 创建后，维护者会按内容修改静态文件并发布到 GitHub Pages。
+        用这个表单提交网站更新。Issue 创建后，GitHub Actions 会尝试自动修改数据文件并生成 PR；合并 PR 后 GitHub Pages 会发布新内容。
   - type: dropdown
     id: update_type
     attributes:
@@ -36,10 +36,19 @@ body:
       label: 菜单变更
       description: 写清楚新增、修改或下架的品类、分类、价格、风味、产地和说明。
       placeholder: |
+        操作：新增
         分类：手冲
         名称：elto 水洗
         价格：38
         风味：甜橙 / 柠檬 / 血橙
+        状态：正在供应
+
+        ---
+
+        操作：修改
+        原名称：冰美式
+        名称：冰美式
+        价格：22
         状态：正在供应
     validations:
       required: false
