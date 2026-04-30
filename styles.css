@@ -76,19 +76,25 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  min-width: 168px;
+  min-width: 176px;
 }
 
 .brand-mark {
   display: grid;
-  width: 38px;
-  height: 38px;
+  width: 54px;
+  height: 60px;
+  flex: 0 0 54px;
   place-items: center;
-  color: #fff;
-  background: var(--moss-dark);
-  border-radius: 50%;
-  font-size: 1.35rem;
-  font-weight: 800;
+  overflow: visible;
+  background: transparent;
+}
+
+.brand-mark img {
+  width: 54px;
+  height: 60px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 1px 1px rgba(28, 33, 29, 0.12));
 }
 
 .brand strong,
