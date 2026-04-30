@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="夏季八调 8tiao.coffee 手冲咖啡店官网，查看营业状态、手冲菜单、主理人公告、上线日历与特调预约。"
+    />
+    <title>夏季八调 | 8tiao.coffee</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="夏季八调首页">
+        <span class="brand-mark">8</span>
+        <span>
+          <strong>夏季八调</strong>
+          <small>8tiao.coffee</small>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="主要导航">
+        <a href="#coffee">手冲</a>
+        <a href="#calendar">日历</a>
+        <a href="#notice">公告</a>
+        <button class="icon-text-button" id="adminEntry" type="button">
+          <i data-lucide="lock-keyhole"></i>
+          主理人
+        </button>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero-section">
+        <div class="hero-media" aria-hidden="true">
+          <img src="./assets/coffee-collage.png" alt="" />
+        </div>
+        <div class="hero-content">
+          <p class="eyebrow">夏天只做八个调性清楚的杯子</p>
+          <h1>夏季八调</h1>
+          <p class="hero-copy">
+            手冲、冰冲和少量特调，每天由主理人按豆单状态更新。
+          </p>
+          <div class="hero-actions">
+            <a class="primary-link" href="#reserve">
+              <i data-lucide="cup-soda"></i>
+              预约今日特调
+            </a>
+            <a class="secondary-link" href="#coffee">看今日豆单</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="status-band" aria-label="今日营业状态">
+        <div class="status-card" id="todayStatus"></div>
+        <div class="special-card" id="todaySpecial"></div>
+        <form class="reserve-form" id="reserveForm">
+          <div>
+            <span class="section-kicker">特调预约</span>
+            <h2>留下你的 ID</h2>
+          </div>
+          <label>
+            <span>称呼 / 社交 ID</span>
+            <input id="guestId" name="guestId" type="text" placeholder="例如 @summer8" autocomplete="nickname" required />
+          </label>
+          <label>
+            <span>预约杯数</span>
+            <input id="reserveCups" name="reserveCups" type="number" min="1" value="1" required />
+          </label>
+          <button class="solid-button" type="submit">
+            <i data-lucide="calendar-plus"></i>
+            提交预约
+          </button>
+          <p class="form-feedback" id="reserveFeedback" role="status"></p>
+        </form>
+      </section>
+
+      <section class="content-section" id="coffee">
+        <div class="section-heading">
+          <span class="section-kicker">Hand Brew</span>
+          <h2>今日手冲</h2>
+          <p>主理人可以随时在管理面板调整品类、价格、售罄状态和图片。</p>
+        </div>
+        <div class="coffee-grid" id="coffeeGrid"></div>
+      </section>
+
+      <section class="content-section calendar-section" id="calendar">
+        <div class="section-heading">
+          <span class="section-kicker">Calendar</span>
+          <h2>上线日历</h2>
+          <p>查看哪天营业、哪天能遇到主理人，以及当天安排。</p>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+      </section>
+
+      <section class="notice-section" id="notice">
+        <div class="section-heading">
+          <span class="section-kicker">Owner Notes</span>
+          <h2>主理人公告</h2>
+        </div>
+        <div class="notice-list" id="noticeList"></div>
+      </section>
+    </main>
+
+    <dialog class="admin-dialog" id="adminDialog">
+      <form class="dialog-frame" method="dialog">
+        <button class="icon-button dialog-close" value="cancel" aria-label="关闭管理面板" type="submit">
+          <i data-lucide="x"></i>
+        </button>
+        <div id="loginPane" class="login-pane">
+          <span class="section-kicker">Admin</span>
+          <h2>主理人登录</h2>
+          <p>演示账号：owner，密码：8tiao2026</p>
+          <label>
+            <span>账号</span>
+            <input id="adminUser" type="text" autocomplete="username" />
+          </label>
+          <label>
+            <span>密码</span>
+            <input id="adminPass" type="password" autocomplete="current-password" />
+          </label>
+          <button class="solid-button" id="loginButton" type="button">
+            <i data-lucide="log-in"></i>
+            登录
+          </button>
+          <p class="form-feedback" id="loginFeedback" role="status"></p>
+        </div>
+
+        <div id="adminPane" class="admin-pane" hidden>
+          <div class="admin-title-row">
+            <div>
+              <span class="section-kicker">Dashboard</span>
+              <h2>主理人控制台</h2>
+            </div>
+            <div class="admin-actions">
+              <button class="ghost-button" id="exportData" type="button">
+                <i data-lucide="download"></i>
+                导出
+              </button>
+              <button class="ghost-button" id="resetData" type="button">
+                <i data-lucide="rotate-ccw"></i>
+                重置
+              </button>
+              <button class="ghost-button" id="logoutButton" type="button">
+                <i data-lucide="log-out"></i>
+                退出
+              </button>
+            </div>
+          </div>
+
+          <section class="admin-block">
+            <h3>今日营业与特调</h3>
+            <div class="admin-grid">
+              <label class="toggle-row">
+                <input id="editOpen" type="checkbox" />
+                <span>今天营业</span>
+              </label>
+              <label class="toggle-row">
+                <input id="editOwnerPresent" type="checkbox" />
+                <span>主理人在店</span>
+              </label>
+              <label>
+                <span>营业时间</span>
+                <input id="editHours" type="text" />
+              </label>
+              <label>
+                <span>主理人备注</span>
+                <input id="editOwnerNote" type="text" />
+              </label>
+              <label>
+                <span>今日特调</span>
+                <input id="editSpecialName" type="text" />
+              </label>
+              <label>
+                <span>特调价格</span>
+                <input id="editSpecialPrice" type="number" min="0" />
+              </label>
+              <label>
+                <span>剩余杯数</span>
+                <input id="editSpecialRemaining" type="number" min="0" />
+              </label>
+              <label>
+                <span>总杯数</span>
+                <input id="editSpecialTotal" type="number" min="0" />
+              </label>
+              <label class="full-width">
+                <span>特调说明</span>
+                <textarea id="editSpecialDesc" rows="3"></textarea>
+              </label>
+            </div>
+            <button class="solid-button" id="saveStatus" type="button">
+              <i data-lucide="save"></i>
+              保存营业信息
+            </button>
+          </section>
+
+          <section class="admin-block">
+            <div class="admin-block-title">
+              <h3>咖啡品类</h3>
+              <button class="ghost-button" id="addCoffee" type="button">
+                <i data-lucide="plus"></i>
+                新增
+              </button>
+            </div>
+            <div class="admin-list" id="coffeeEditor"></div>
+          </section>
+
+          <section class="admin-block">
+            <div class="admin-block-title">
+              <h3>预约记录</h3>
+              <button class="ghost-button" id="clearReservations" type="button">
+                <i data-lucide="eraser"></i>
+                清空
+              </button>
+            </div>
+            <div class="admin-list" id="reservationList"></div>
+          </section>
+
+          <section class="admin-block">
+            <div class="admin-block-title">
+              <h3>公告系统</h3>
+              <button class="ghost-button" id="addNotice" type="button">
+                <i data-lucide="plus"></i>
+                新增
+              </button>
+            </div>
+            <div class="admin-list" id="noticeEditor"></div>
+          </section>
+
+          <section class="admin-block">
+            <div class="admin-block-title">
+              <h3>上线日历</h3>
+              <button class="ghost-button" id="addCalendarDay" type="button">
+                <i data-lucide="plus"></i>
+                新增日期
+              </button>
+            </div>
+            <div class="admin-list" id="calendarEditor"></div>
+          </section>
+        </div>
+      </form>
+    </dialog>
+
+    <template id="coffeeEditorTemplate">
+      <article class="editor-card coffee-editor-card">
+        <div class="editor-card-title">
+          <strong></strong>
+          <button class="icon-button delete-row" type="button" aria-label="删除咖啡">
+            <i data-lucide="trash-2"></i>
+          </button>
+        </div>
+        <div class="editor-grid">
+          <label>
+            <span>名称</span>
+            <input data-field="name" type="text" />
+          </label>
+          <label>
+            <span>价格</span>
+            <input data-field="price" type="number" min="0" />
+          </label>
+          <label>
+            <span>产地</span>
+            <input data-field="origin" type="text" />
+          </label>
+          <label>
+            <span>处理法</span>
+            <input data-field="process" type="text" />
+          </label>
+          <label>
+            <span>风味</span>
+            <input data-field="notes" type="text" />
+          </label>
+          <label>
+            <span>图片</span>
+            <select data-field="image">
+              <option value="./assets/coffee-ethiopia.png">埃塞俄比亚杯</option>
+              <option value="./assets/coffee-guatemala.png">危地马拉杯</option>
+              <option value="./assets/coffee-ice.png">冰手冲</option>
+              <option value="./assets/coffee-citrus.png">夏日特调</option>
+            </select>
+          </label>
+          <label class="toggle-row">
+            <input data-field="available" type="checkbox" />
+            <span>正在供应</span>
+          </label>
+        </div>
+        <button class="solid-button save-row" type="button">
+          <i data-lucide="save"></i>
+          保存
+        </button>
+      </article>
+    </template>
+
+    <template id="noticeEditorTemplate">
+      <article class="editor-card">
+        <div class="editor-card-title">
+          <strong></strong>
+          <button class="icon-button delete-row" type="button" aria-label="删除公告">
+            <i data-lucide="trash-2"></i>
+          </button>
+        </div>
+        <div class="editor-grid">
+          <label>
+            <span>标题</span>
+            <input data-field="title" type="text" />
+          </label>
+          <label>
+            <span>日期</span>
+            <input data-field="date" type="date" />
+          </label>
+          <label class="full-width">
+            <span>内容</span>
+            <textarea data-field="body" rows="3"></textarea>
+          </label>
+        </div>
+        <button class="solid-button save-row" type="button">
+          <i data-lucide="save"></i>
+          保存
+        </button>
+      </article>
+    </template>
+
+    <template id="calendarEditorTemplate">
+      <article class="editor-card">
+        <div class="editor-card-title">
+          <strong></strong>
+          <button class="icon-button delete-row" type="button" aria-label="删除日期">
+            <i data-lucide="trash-2"></i>
+          </button>
+        </div>
+        <div class="editor-grid">
+          <label>
+            <span>日期</span>
+            <input data-field="date" type="date" />
+          </label>
+          <label>
+            <span>时间</span>
+            <input data-field="hours" type="text" />
+          </label>
+          <label>
+            <span>安排</span>
+            <input data-field="event" type="text" />
+          </label>
+          <label class="toggle-row">
+            <input data-field="open" type="checkbox" />
+            <span>营业</span>
+          </label>
+          <label class="toggle-row">
+            <input data-field="owner" type="checkbox" />
+            <span>主理人在店</span>
+          </label>
+        </div>
+        <button class="solid-button save-row" type="button">
+          <i data-lucide="save"></i>
+          保存
+        </button>
+      </article>
+    </template>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
