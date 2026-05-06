@@ -163,8 +163,43 @@
       "date": "2026-05-06",
       "open": true,
       "owner": true,
+      "hours": "12:00 - 13:00",
+      "event": "水洗肯尼亚"
+    },
+    {
+      "date": "2026-05-07",
+      "open": true,
+      "owner": false,
+      "hours": "12:00 - 13:00",
+      "event": "TBD"
+    },
+    {
+      "date": "2026-05-08",
+      "open": true,
+      "owner": false,
       "hours": "12:00 - 19:00",
-      "event": "黄昏特饮"
+      "event": "TBD"
+    },
+    {
+      "date": "2026-05-09",
+      "open": true,
+      "owner": false,
+      "hours": "12:00 - 19:00",
+      "event": "营业"
+    },
+    {
+      "date": "2026-05-10",
+      "open": true,
+      "owner": false,
+      "hours": "12:00 - 19:00",
+      "event": "营业"
+    },
+    {
+      "date": "2026-05-11",
+      "open": true,
+      "owner": false,
+      "hours": "12:00 - 19:00",
+      "event": "TBD"
     }
   ]
 }
